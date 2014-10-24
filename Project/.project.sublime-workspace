@@ -1,0 +1,489 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"l",
+				"length"
+			],
+			[
+				"re",
+				"recipe"
+			],
+			[
+				"get",
+				"getBudgetMeals"
+			],
+			[
+				"diet",
+				"diet-customize"
+			],
+			[
+				"fat",
+				"fatmealprices"
+			],
+			[
+				"_",
+				"_GET"
+			],
+			[
+				"protein",
+				"proteinRadio"
+			],
+			[
+				"res",
+				"resultSet"
+			],
+			[
+				"meal",
+				"mealList"
+			],
+			[
+				"displ",
+				"displayMeals"
+			],
+			[
+				"session",
+				"session_start"
+			],
+			[
+				"selected",
+				"selectedDiet"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"register",
+				"registerJax"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"home",
+				"home-1"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"poly",
+				"polymer-ui-card"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 85.0,
+		"selected_items":
+		[
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"re",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"packat",
+				"Package Control: Install Package"
+			],
+			[
+				"git ",
+				"Git: Show Current File"
+			],
+			[
+				"git commit",
+				"Git: Commit history"
+			],
+			[
+				"git: init",
+				"Git: Diff All Files (Ignore Whitespace)"
+			],
+			[
+				"git init",
+				"Git: Diff All Files (Ignore Whitespace)"
+			],
+			[
+				"GIT: ",
+				"Git: Commit history"
+			],
+			[
+				"git",
+				"Git: Init"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"Package",
+				"Package Control: Install Package"
+			],
+			[
+				"Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"Package ",
+				"Package Control: Install Package"
+			],
+			[
+				"Packe ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control Install Package",
+				"Package Control: Install Package"
+			],
+			[
+				"package control",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 514.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"Install Package",
+			"install Package",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Nicholas/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Nicholas/AppData/Roaming/Sublime Text 3/Packages/User/Side Bar.sublime-settings",
+		"/C/Users/Nicholas/Dropbox/Work/Level III Semester I/COMP 3550/Master-Codes/master.html",
+		"/C/Users/Nicholas/Dropbox/Work/Level III Semester I/COMP 3550/Master-Codes/master.php",
+		"/C/Users/Nicholas/Dropbox/GitHub/COMP3150/Project/src/test.java",
+		"/C/Users/Nicholas/Dropbox/Work/Level III Semester I/COMP 3550/Master-Codes/master.js",
+		"/C/Users/Nicholas/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/xampp/htdocs/dawn/elements/home-1.php",
+		"/C/xampp/htdocs/dawn/lib.php",
+		"/C/xampp/htdocs/dawn/mobile.php",
+		"/C/xampp/htdocs/dawn/elements/home-2.php",
+		"/C/xampp/htdocs/dawn/index.php",
+		"/C/Users/Nicholas/AppData/Local/Temp/Rar$DIa0.170/main.js",
+		"/C/xampp/htdocs/dawn/js/main.js",
+		"/C/xampp/htdocs/dawn/main.js",
+		"/C/Users/Nicholas/AppData/Local/Temp/Rar$DIa0.001/main.js",
+		"/G/main.js",
+		"/C/xampp/htdocs/dawn/script.js",
+		"/C/xampp/htdocs/dawn/bower_components/HTMLImports/src/base.js",
+		"/C/xampp/htdocs/dawn/elements/diet-customize.php",
+		"/C/xampp/htdocs/dawn/login.php",
+		"/C/Users/Nicholas/Desktop/diet-select.php",
+		"/C/Users/Nicholas/Downloads/recipesview.sql",
+		"/C/xampp/htdocs/dawn/shoppinglist.php",
+		"/C/xampp/htdocs/Farmers/login.php",
+		"/C/Users/Nicholas/Desktop/test/test.html",
+		"/C/xampp/htdocs/dawn/dietname.php",
+		"/C/xampp/htdocs/Movies/movieLinks.php",
+		"/C/xampp/htdocs/Movies/lib.php",
+		"/C/xampp/htdocs/Movies/movies.php",
+		"/C/xampp/htdocs/Movies/view.php",
+		"/C/Users/Nicholas/Downloads/recipeproducts.sql",
+		"/C/xampp/htdocs/plat/elements/home-1.php",
+		"/C/xampp/htdocs/plat/dietname.php",
+		"/C/xampp/htdocs/plat/index.php",
+		"/C/xampp/htdocs/plat/elements/diet-select.php",
+		"/C/xampp/htdocs/plat/register.php",
+		"/C/xampp/htdocs/plat/elements/home-2.php",
+		"/C/xampp/htdocs/plat/lib.php",
+		"/C/xampp/htdocs/plat/elements/home-1.html",
+		"/C/xampp/htdocs/plat/elements/home-2.html",
+		"/C/xampp/htdocs/plat/test/chip_old.php",
+		"/C/Users/Nicholas/AppData/Local/Temp/Rar$EXa0.039/plat/elements/diet-select.html",
+		"/C/xampp/htdocs/grid/config.php",
+		"/C/xampp/htdocs/grid/js/editablegrid-2.0.1.js",
+		"/C/xampp/htdocs/grid/js/demo.js",
+		"/C/xampp/htdocs/grid/loaddata.php",
+		"/C/xampp/htdocs/grid/EditableGrid.php",
+		"/C/xampp/htdocs/grid/index.html",
+		"/C/xampp/htdocs/grid/update.php",
+		"/C/xampp/htdocs/grid/add.php",
+		"/C/xampp/htdocs/grid/delete.php",
+		"/C/xampp/htdocs/plat/login.php",
+		"/C/xampp/htdocs/Farmers/index.php",
+		"/C/xampp/htdocs/plat/logout.php",
+		"/C/xampp/htdocs/plat/elements/diet-select.html",
+		"/D/DHTML/Code_1.html",
+		"/D/DHTML/data.php",
+		"/C/xampp/htdocs/plat/site.html",
+		"/C/xampp/htdocs/gapi/database-linker.php",
+		"/C/xampp/htdocs/plat/bower_components/polymer/polymer.html",
+		"/C/Users/Nicholas/AppData/Local/Temp/Rar$DIa0.989/lib.php",
+		"/C/Users/Nicholas/Desktop/site.html",
+		"/C/Users/Nicholas/AppData/Local/Temp/Rar$DIa0.071/login.php",
+		"/C/Users/Nicholas/AppData/Local/Temp/Rar$DIa0.639/login.php",
+		"/C/xampp/htdocs/plat/app.php",
+		"/C/Users/Nicholas/Downloads/retailers.sql",
+		"/C/xampp/htdocs/Movies/js/main.js",
+		"/C/xampp/htdocs/prjt/js/views.js",
+		"/C/xampp/htdocs/plat/app.html",
+		"/C/xampp/htdocs/Movies/header.php",
+		"/C/xampp/htdocs/Movies/footer.php",
+		"/C/xampp/htdocs/Movies/index.php",
+		"/C/Users/Nicholas/Downloads/budgetcartlifestyle.sql",
+		"/C/xampp/htdocs/plat/elements/home1.html",
+		"/C/xampp/htdocs/plat/grid2.html",
+		"/C/xampp/htdocs/plat/grid.html",
+		"/C/xampp/htdocs/Farmers/lib.php",
+		"/C/xampp/htdocs/plat/diet-select.html",
+		"/C/xampp/htdocs/poly/elements/age-slider.html",
+		"/C/xampp/htdocs/plat/bower_components/core-animated-pages/demos/simple.html",
+		"/C/xampp/htdocs/plat/page.html",
+		"/C/xampp/htdocs/plat/database-linker.php",
+		"/C/xampp/htdocs/plat/app2.html",
+		"/C/xampp/htdocs/plat/page2.html",
+		"/C/xampp/htdocs/plat/test.html",
+		"/C/xampp/htdocs/plat/chip_old.php",
+		"/C/xampp/htdocs/polymer/starter/post-card.html",
+		"/C/xampp/htdocs/poly/elements/greeting-tag.html",
+		"/C/xampp/htdocs/polymer/starter/post-list.html",
+		"/C/xampp/htdocs/polymer/starter/index.html",
+		"/C/xampp/htdocs/plat/index.html",
+		"/C/xampp/htdocs/poly/index.html",
+		"/C/xampp/htdocs/plat/chip_old.html",
+		"/C/xampp/htdocs/poly/elements/greetings-tag.html",
+		"/C/Users/Nicholas/Desktop/movies.sql",
+		"/C/Users/Nicholas/Downloads/127_0_0_1.sql",
+		"/C/Users/Nicholas/Downloads/crop_manager.sql",
+		"/C/xampp/htdocs/Farmers/logout.php",
+		"/C/Users/Nicholas/Desktop/movie_rentals.sql",
+		"/C/xampp/htdocs/Farmers/cropTable.php",
+		"/C/xampp/htdocs/Farmers/register.php",
+		"/C/xampp/htdocs/plat/elements/home-tab.html",
+		"/C/Users/Nicholas/Desktop/project.sql",
+		"/C/xampp/htdocs/Farmers/crops.php",
+		"/C/xampp/htdocs/plat/elements/-tab_3.html",
+		"/C/xampp/htdocs/plat/elements/-tab.html",
+		"/C/xampp/htdocs/poly/elements/ready-element.html",
+		"/C/xampp/htdocs/plat/vid.html",
+		"/C/xampp/htdocs/Lab/addShift.php",
+		"/C/xampp/htdocs/Lab/index.php",
+		"/C/xampp/htdocs/Lab/shiftTable.php",
+		"/C/xampp/htdocs/polymer/step-3/index.html",
+		"/C/xampp/htdocs/plat/style.css",
+		"/C/xampp/htdocs/plat/script.js",
+		"/C/xampp/htdocs/plat/elements/-tag.html",
+		"/C/xampp/htdocs/poly/elements/editable-color-picker.html",
+		"/C/xampp/htdocs/poly/elements/color-picker.html",
+		"/C/xampp/htdocs/poly/elements/my-element.html",
+		"/C/xampp/htdocs/poly/elements/proto-element.html",
+		"/C/xampp/htdocs/poly/elements/fav-color.html",
+		"/C/xampp/htdocs/poly/elements/name-tag.html",
+		"/C/xampp/htdocs/poly/bower_components/polymer/polymer.html",
+		"/C/xampp/htdocs/Lab/lib.php"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"Omelette",
+			":",
+			"absoulte",
+			"result2",
+			"result1",
+			"sugarMeals",
+			"infoPage",
+			"loginPage",
+			"signPage",
+			"showInfo",
+			"showLogin",
+			"showSignup",
+			"renderer",
+			"/>\n",
+			"bower_componentes",
+			"bower_componenets",
+			"artist",
+			"album",
+			"artist",
+			"selectedAlbum",
+			"music-demo",
+			"jquery-1.10.1.min.js",
+			"ready"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"list",
+			"meals",
+			"sugarPage",
+			"fatPage",
+			"sodiumPage",
+			"proteinPage",
+			"showFat",
+			"showSodium",
+			"showProtein",
+			"bower_components",
+			"calories",
+			"dietName",
+			"name",
+			"selectedDiet",
+			"diet-select",
+			"jquery-2.1.1.js"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"project": ".project.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 261.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
