@@ -7,3 +7,4 @@ Right just so we all know how to use this git stuff, can we all edit this readme
 
 Nicholas Mendez - 811002795
 Kimberly Bridglal - 811000371
+Jherez Taylor - 812003287
