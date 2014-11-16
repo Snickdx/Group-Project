@@ -192,6 +192,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
         catch {
           case ioe : IOException => "300 File retrieval was not successful"
         }
+      case false => "300 File retrieval unsucessful - file not found"
     }
   }
   

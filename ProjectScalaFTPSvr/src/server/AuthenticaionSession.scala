@@ -9,8 +9,8 @@ import scala.util.matching.Regex
 
 class AuthenticaionSession(client : Socket) {// extends Callable[Option[ClientSession]]{
   
-  private val invalidPasswordString = "430 Invalid username or password"
-  private val acceptedUsername = "331 Username accepted, need password\r\n"
+  private val invalidPasswordString = "530 Invalid username or password"
+  private val acceptedUsername = "331 Username okay, need password\r\n"
   private val goodbyeString = "231 quiting service"
   private val inputStream = client.getInputStream()
   private val clientCommands = new BufferedReader(new InputStreamReader(inputStream))

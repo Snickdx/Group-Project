@@ -67,7 +67,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
   def pwd() : String = {
     val filepath = user.dept
     val folder = new File(filepath)
-    "200 " + folder.listFiles().mkString(":")
+    "250 " + folder.listFiles().mkString(":")
   }  
   
   /*
@@ -120,7 +120,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
       val file = new File(filename)
       file.delete() match {
         case false => "530 Error in deleting files"
-        case true => "200 Delete successful"
+        case true => "250 Delete successful"
       }
     case _ => "530 Only admins may delete files"
   }
@@ -158,10 +158,10 @@ class ClientSession(client : Socket, user : User) extends Runnable {
             val stream = new FileOutputStream(file)
             stream.write(arrs)
             stream.close()
-            "200 File storage successful"
+            "250 File storage successful"
           }
           catch {
-            case ioe : IOException => "300 Couldn't complete operation"
+            case ioe : IOException => "450 Couldn't complete operation"
           }
       }
   }
@@ -198,14 +198,16 @@ class ClientSession(client : Socket, user : User) extends Runnable {
           val path = Paths.get(filepath)
           val arr = Files.readAllBytes(path)
           val size = arr.length
-          toClient.writeBytes("Expect " + size + "\r\n")
+          toClient.writeBytes("125 Expect " + size + "\r\n")
           toClient.write(arr, 0, size)
-          "200 File Retrieval Successful" 
+          "250 File Retrieval Successful" 
         }
         catch {
-          case ioe : IOException => "300 File retrieval was not successful"
+          case ioe : IOException => "450 File retrieval was not successful"
         }
+      case false => "553 File does not exist"
     }
+    
   }
   
   /*
