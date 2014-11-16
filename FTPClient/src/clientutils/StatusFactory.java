@@ -62,6 +62,14 @@ public class StatusFactory
 		{
 			return Status.ACTION_NOT_TAKEN;
 		}
+		else if(check.equals("501"))
+		{
+			return Status.SYNTAX_ERROR_IN_REQUEST;
+		}
+		else if(check.equals("500"))
+		{
+			return Status.COMMAND_NOT_RECOGNIZED;
+		}
 		
 		throw new InvalidFTPCodeException(check);
 		
