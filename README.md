@@ -16,3 +16,11 @@ Inzamam Rahaman - 810006495
 |Add file to server | STOR filename filesize(bytes) | 200 File write sucessful|
 |Retrieval File from server| RETR filename |125 Expect numberofbytes|
 |Get directory contents | PWD | 200 filename1:filename2:filename3|
+
+FTP Status codes that need to be handled by client:
+(Suggestion: use enums to handle on client)
+1. 403 - Invalid Username or password
+2. 331 - Username accpeted, but we need password
+3. 231 - Quiting service
+4. 230 - User logged in, proceeding to service
+5. 530 - Not logged in
