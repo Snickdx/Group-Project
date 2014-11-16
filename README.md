@@ -14,5 +14,5 @@ Inzamam Rahaman - 810006495
 | Functionality | Expected Response From Client | Epected Response from Server|
 |---------------|:----------------------------:|-----------------------------:|
 |Add file to server | STOR filename filesize(bytes) | 200 File write sucessful|
-|Retrieval File from server| RETR filename | Expect numberofbytes|
+|Retrieval File from server| RETR filename |125 Expect numberofbytes|
 |Get directory contents | PWD | 200 filename1:filename2:filename3|
