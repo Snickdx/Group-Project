@@ -230,7 +230,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
     case STOR2(filename) => "501 Need number of lines"
     case RETR(filename) => retr(filename)
     case PWD() => pwd()
-    case _ => "Unrecognized command"
+    case _ => "500 Unrecognized command"
   }
 }
   
