@@ -1,5 +1,7 @@
 package clientutils;
 
+import java.util.StringTokenizer;
+
 public class StatusFactory
 {
 	
@@ -21,6 +23,7 @@ public class StatusFactory
 	
 	public Status getStatus(String code) throws InvalidFTPCodeException
 	{
+		
 		String check = code.trim();
 		if(check.equals("403"))
 		{
