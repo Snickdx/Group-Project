@@ -57,9 +57,9 @@ class ClientSession(client : Socket, user : User) extends Runnable {
   }
   
   // The following methods hanlde the specfic processing of each command
-  def user(username : String) = "503 Already logged in\r\n"
+  def user(username : String) = "503 Already logged in"
   
-  def pass(password : String) = "503 Already logged in\r\n"
+  def pass(password : String) = "503 Already logged in"
     
   /*
    * Used to retrieve the names of all files in the directory
@@ -67,7 +67,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
   def pwd() : String = {
     val filepath = user.dept
     val folder = new File(filepath)
-    folder.listFiles().mkString(":")
+    "200 " + folder.listFiles().mkString(":")
   }  
   
   /*
@@ -75,7 +75,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
    */
   def quit() = {
     this.runClientThread = false
-    "231 User logging out...\r\n"
+    "231 User logging out..."
   }
   
   /*
