@@ -90,7 +90,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
       val oldFile = new File(user.dept + "\\" + oldFilename)
       val newFile = new File(user.dept + "\\" + filename)
       oldFile.renameTo(newFile) match {
-        case true => "200 File rename successful"
+        case true => "250 File rename successful"
         case false => "450 Requested file action was not taken"
       }
     case _ => "530 Invalid command sequence, RNFR must be followed by RNTO"

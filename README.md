@@ -24,3 +24,10 @@ FTP Status codes that need to be handled by client:
 3. 231 - Quiting service
 4. 230 - User logged in, proceeding to service
 5. 530 - Not logged in
+6. 503 - Bad sequence of commands
+7. 250 - Requested operation successful
+8. 450 - Requested action not taken
+9. 202 - Command not implemented
+10. 553 - File does not exist
+
+Note: all 2xx commands may be represtned by a single enum for success
