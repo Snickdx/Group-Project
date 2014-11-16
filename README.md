@@ -31,3 +31,5 @@ FTP Status codes that need to be handled by client:
 10. 553 - File does not exist
 
 Note: all 2xx commands may be represtned by a single enum for success
+
+Note: code to represent FTP Status codes completed in client; just write code to handle the codes
