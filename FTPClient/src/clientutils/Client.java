@@ -16,8 +16,8 @@ public abstract class Client
 	private InputStream input;
 	private BufferedReader fromServer;
 	private DataOutputStream toServer;
-	private StatusFactory fact;
-	private FTPResponseParser respParser;
+	protected StatusFactory fact;
+	protected FTPResponseParser respParser;
 	
 	
 	public Client(InetAddress serverAddress, int serverPort) throws IOException
@@ -33,29 +33,30 @@ public abstract class Client
 		
 	}
 	
-	private void writeToServer(String str) throws IOException
+	protected void writeToServer(String str) throws IOException
 	{
 		toServer.writeBytes(str + "\r\n");
 	}
 	
-	private void writeToServer(byte[] bytes) throws IOException
+	protected void writeToServer(byte[] bytes) throws IOException
 	{
 		toServer.write(bytes, 0, bytes.length);
 	}
 	
-	private String readServer() throws IOException
+	protected String readServer() throws IOException
 	{
 		return fromServer.readLine();
 	}
 	
-	private byte[] readServer(int numBytes) throws IOException
+	protected byte[] readServer(int numBytes) throws IOException
 	{
 		byte[] arr = new byte[numBytes];
 		input.read(arr);
 		return arr;
 	}
 	
-	public abstract ServerResp<String> login();
+	public abstract ServerResp<String> login() 
+			throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException;
 	
 	public ServerResp<String[]> pwd() throws 
 	IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse
@@ -137,5 +138,43 @@ public abstract class Client
 		FTPParseProduct prod = this.respParser.parseResponse(resp);
 		Status stat = fact.getStatus(prod.getCode());
 		return new ServerResp<String>(prod.getBody(), stat);
+	}
+	
+	private Set<String> setDifference(Set<String> set1, Set<String> set2)
+	{
+		HashSet<String> answer = new HashSet<String>();
+		for(String str : set1)
+		{
+			if(!set2.contains(str))
+			{
+				answer.add(str);
+			}
+		}
+		return answer;
+	}
+	
+	public void clientMirror(String dir) throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse
+	{
+		ServerResp<String[]> filesResp = this.pwd();
+		if(filesResp.getStat() == Status.SUCCESSFUL_FILE_OPERATION)
+		{
+			String[] fileNames = filesResp.getItem();
+			HashSet<String> fileSet = new HashSet<String>();
+			File folder = new File(dir);
+			File[] filesInFolder = folder.listFiles();
+			HashSet<String> names = new HashSet<String>();
+			for(File f : filesInFolder)
+			{
+				names.add(f.getName());
+			}
+			Set<String> filesToCopy = setDifference(fileSet, names);
+			for(String filename : filesToCopy)
+			{
+				ServerResp<String> resp = this.retr(dir, filename);
+			}
+		}
+		
+		
+		
 	}
 }

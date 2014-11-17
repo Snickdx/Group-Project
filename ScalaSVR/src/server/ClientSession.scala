@@ -67,7 +67,7 @@ class ClientSession(client : Socket, user : User) extends Runnable {
   def pwd() : String = {
     val filepath = user.dept
     val folder = new File(filepath)
-    "250 " + folder.listFiles().mkString(":")
+    "250 " + folder.listFiles().map(_.getName()).mkString(":")
   }  
   
   /*
