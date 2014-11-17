@@ -73,6 +73,10 @@ public class StatusFactory
 		{
 			return Status.COMMAND_NOT_RECOGNIZED;
 		}
+		else if(check.equals("125"))
+		{
+			return Status.EXPECT_FILE;
+		}
 		
 		throw new InvalidFTPCodeException(check);
 		
