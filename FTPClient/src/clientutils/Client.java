@@ -107,5 +107,26 @@ public abstract class Client
 		
 	}
 	
-	
+	public ServerResp<String> retr(String dir, String filename) throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException
+	{
+		writeToServer("RETR " + filename);
+		String resp = readServer();
+		FTPParseProduct prod = this.respParser.parseResponse(resp);
+		Status stat = fact.getStatus(prod.getCode());
+		if(stat == Status.EXPECT_FILE)
+		{
+			StringTokenizer st = new StringTokenizer(prod.getBody());
+			String intVal = st.nextToken();
+			Integer numBytes = Integer.parseInt(intVal);
+			byte[] forFile = readServer(numBytes);
+			File file = new File(dir + "\\" + filename);
+			FileOutputStream fileOutput = new FileOutputStream(file);
+			fileOutput.write(forFile);
+			String resp1 = readServer();
+			FTPParseProduct prod1 = this.respParser.parseResponse(resp1);
+			Status stat1 = fact.getStatus(prod1.getCode());
+			return new ServerResp<String>(prod1.getBody(), stat1);
+		}
+		return new ServerResp<String>(prod.getBody(), stat);
+	}
 }
