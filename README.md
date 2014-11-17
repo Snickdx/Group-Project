@@ -33,3 +33,13 @@ FTP Status codes that need to be handled by client:
 Note: all 2xx commands may be represtned by a single enum for success
 
 Note: code to represent FTP Status codes completed in client; just write code to handle the codes
+
+Code to perfrom heavy lifting of client completed.
+
+To use:
+
+Client client = new AuthenticatedClient(address, port, username, password);
+
+Call services from client and handle responses in UI
+Read the code in Client and AuthenticatedClient classes to understand how to call the methods
+Read the Status enum and use common sense to see how to handle the Responses from the server
