@@ -20,7 +20,7 @@ public abstract class Client
 	private FTPResponseParser respParser;
 	
 	
-	public Client(InetAddress serverAddres, int serverPort) throws IOException
+	public Client(InetAddress serverAddress, int serverPort) throws IOException
 	{
 		this.fact = StatusFactory.getInstance();
 		this.serverAddress = serverAddress;
@@ -55,7 +55,7 @@ public abstract class Client
 		return arr;
 	}
 	
-	public abstract void login();
+	public abstract ServerResp<String> login();
 	
 	public ServerResp<String[]> pwd() throws 
 	IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse
@@ -127,6 +127,15 @@ public abstract class Client
 			Status stat1 = fact.getStatus(prod1.getCode());
 			return new ServerResp<String>(prod1.getBody(), stat1);
 		}
+		return new ServerResp<String>(prod.getBody(), stat);
+	}
+	
+	public ServerResp<String> quit() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException
+	{
+		writeToServer("QUIT");
+		String resp = readServer();
+		FTPParseProduct prod = this.respParser.parseResponse(resp);
+		Status stat = fact.getStatus(prod.getCode());
 		return new ServerResp<String>(prod.getBody(), stat);
 	}
 }
