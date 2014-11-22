@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" type="javafx.scene.layout.VBox" xmlns:fx="http://javafx.com/fxml">
+<fx:root prefHeight="600.0" prefWidth="900.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
   <children>
     <SplitPane dividerPositions="0.2182628062360802, 0.6069042316258352" focusTraversable="true" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <items>
@@ -22,7 +22,7 @@
                 <Color blue="0.624" green="0.624" red="0.624" fx:id="x2" />
               </textFill>
             </Label>
-                  <Button layoutX="23.0" layoutY="224.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="148.0" text="Sync Down Load Mirror" />
+                  <Button layoutX="23.0" layoutY="224.0" mnemonicParsing="false" prefHeight="128.0" prefWidth="148.0" text="Sync Download Mirror" />
           </children>
         </AnchorPane>
         <AnchorPane prefHeight="576.0" prefWidth="339.0">

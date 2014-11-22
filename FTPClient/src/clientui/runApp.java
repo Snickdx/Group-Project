@@ -1,17 +1,18 @@
-package project;
+package clientui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class ClientApp extends Application {
+public class runApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-        UIController ui = new UIController();
-        primaryStage.setScene(new Scene(ui));
+		
+        primaryStage.setScene(new Scene(new mainScreenController()));
 		primaryStage.setTitle("FTP Client");
         primaryStage.show();
+        
 	}
 
 	public static void main(String[] args) {
