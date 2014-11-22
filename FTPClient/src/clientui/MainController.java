@@ -32,44 +32,24 @@
 
 package clientui;
 
-import java.io.IOException;
 import java.net.URL;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import clientutils.AuthenticatedClient;
-import javafx.beans.property.StringProperty;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
-public class mainScreenController extends VBox implements Initializable {
+public class MainController extends Controller implements Initializable {
 	
-	AuthenticatedClient client;
 	FXMLLoader loader;
 	
-	@FXML Button login;
+	@FXML Button syncBtn, logoutBtn, uploadBtn, downloadBtn;
 	@FXML VBox content;
-	public mainScreenController() {
-        
-		loader = new FXMLLoader(getClass().getResource("startScreen.fxml"));
-        loader.setRoot(this);
-        loader.setController(this);
-        
-        try {
-            loader.load();            
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
+	
+	public MainController() {  
+		super("mainView.fxml");
     }
 
 	@Override
@@ -78,8 +58,5 @@ public class mainScreenController extends VBox implements Initializable {
 		
 	}
 	
-	public void login() throws IOException{
-		System.out.println("lol");
-	}
 
 }

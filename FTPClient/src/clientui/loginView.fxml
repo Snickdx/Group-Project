@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
+<?import java.util.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -21,9 +22,9 @@
                       <Font size="25.0" />
                    </font>
                 </Label>
-                <TextField fx:id="addRemote1" layoutX="217.0" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="213.0" />
-                <TextField fx:id="addRemote11" layoutX="217.0" layoutY="166.0" prefHeight="25.0" prefWidth="214.0" />
-                <Button id="loginBtn" fx:id="login" layoutX="218.0" layoutY="204.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#login" prefHeight="38.0" prefWidth="213.0" text="Log-In">
+                <TextField fx:id="usernameTF" layoutX="217.0" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="213.0" />
+                <TextField fx:id="passwordTF" layoutX="217.0" layoutY="166.0" prefHeight="25.0" prefWidth="214.0" />
+                <Button id="loginBtn" fx:id="loginBtn" layoutX="218.0" layoutY="204.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="213.0" text="Log-In">
                    <font>
                       <Font size="13.0" />
                    </font>
