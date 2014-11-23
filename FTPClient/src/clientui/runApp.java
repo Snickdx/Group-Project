@@ -13,7 +13,7 @@ public class RunApp extends Application implements ControllerSwitcher {
 	public void start(Stage primaryStage) {
 		
       this.stage = primaryStage;
-      showLogin();
+      showMain();
         
 	}
 	
@@ -24,7 +24,7 @@ public class RunApp extends Application implements ControllerSwitcher {
 	    stage.show();
 	}
 	
-	public void showMain(RunApp app){
+	public void showMain(){
 		stage.close();
 		stage.setScene(new Scene(new MainController()));
 		stage.setTitle("FTP Client");

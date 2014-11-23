@@ -35,18 +35,22 @@ package clientui;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import clientutils.AuthenticatedClient;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.VBox;
 
 public class MainController extends Controller implements Initializable {
 	
 	FXMLLoader loader;
+	AuthenticatedClient client;
 	
 	@FXML Button syncBtn, logoutBtn, uploadBtn, downloadBtn;
 	@FXML VBox content;
+	@FXML ListView homeList, serverList;
 	
 	public MainController() {  
 		super("mainView.fxml");
@@ -58,5 +62,19 @@ public class MainController extends Controller implements Initializable {
 		
 	}
 	
+	public void upload(){
+		
+	}
+	
+	public void download(){
+		
+	}
 
+	public void sync(){
+		
+	}
+	
+	public void loadView(){
+		
+	}
 }
