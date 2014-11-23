@@ -9,7 +9,7 @@ Nicholas Mendez - 811002795
 Kimberly Bridglal - 811000371
 Jherez Taylor - 812003287
 Inzamam Rahaman - 810006495
-
+David Charles - 811000385
 
 | Functionality | Expected Response From Client | Epected Response from Server|
 |---------------|:----------------------------:|-----------------------------:|
