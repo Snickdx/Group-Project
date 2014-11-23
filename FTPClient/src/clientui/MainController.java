@@ -32,16 +32,29 @@
 
 package clientui;
 
+import java.io.IOException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
-import clientutils.AuthenticatedClient;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.VBoxBuilder;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import clientutils.AuthenticatedClient;
 
 public class MainController extends Controller implements Initializable {
 	
@@ -52,8 +65,50 @@ public class MainController extends Controller implements Initializable {
 	@FXML VBox content;
 	@FXML ListView homeList, serverList;
 	
-	public MainController() {  
+
+	
+	
+	public MainController() throws UnknownHostException, IOException {  
 		super("mainView.fxml");
+		//client = new AuthenticatedClient(InetAddress.getByName(globals.server), 8000, "User1", "pass1");
+		
+		final ContextMenu contextMenu = new ContextMenu();
+		MenuItem rename = new MenuItem("Rename");
+		MenuItem delete = new MenuItem("Delete");
+
+		contextMenu.getItems().addAll(rename, delete);
+		
+		rename.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		    	String selected=(String) serverList.getSelectionModel().getSelectedItem();
+		    	
+		    	RenameController rc = new RenameController("renameView.fxml");
+		    	Stage dialogStage = new Stage();
+		    	dialogStage.initModality(Modality.WINDOW_MODAL);
+		    	dialogStage.setScene(new Scene(rc));
+		    	dialogStage.show();
+		    	rc.renameBtn.setOnAction(new EventHandler<ActionEvent>(){
+		    		public void handle(ActionEvent event){
+		    			System.out.println("Rename "+ selected + " to "+rc.renameTF.getText());
+		    			Stage stage = (Stage) rc.renameBtn.getScene().getWindow();
+		    			stage.close();
+		    		}	
+		    	});
+		    	
+		    }
+		});
+		
+		delete.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override
+		    public void handle(ActionEvent event) {
+		    	String selected=(String) serverList.getSelectionModel().getSelectedItem();
+		    	System.out.println("delete");
+		    }
+		});
+		
+		serverList.setContextMenu(contextMenu);
+		
     }
 
 	@Override
@@ -63,11 +118,12 @@ public class MainController extends Controller implements Initializable {
 	}
 	
 	public void upload(){
+		String selected=(String) homeList.getSelectionModel().getSelectedItem();
 		
 	}
 	
 	public void download(){
-		
+		String selected=(String) serverList.getSelectionModel().getSelectedItem();
 	}
 
 	public void sync(){

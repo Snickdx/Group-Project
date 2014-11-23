@@ -1,7 +1,11 @@
 package clientui;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class RunApp extends Application implements ControllerSwitcher {
@@ -10,9 +14,10 @@ public class RunApp extends Application implements ControllerSwitcher {
 	Controller current;
 	
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws UnknownHostException, IOException {
 		
       this.stage = primaryStage;
+      this.stage.getIcons().add(new Image("file: icon.png"));
       showMain();
         
 	}
@@ -20,14 +25,14 @@ public class RunApp extends Application implements ControllerSwitcher {
 	public void showLogin(){
 		stage.close();
 		stage.setScene(new Scene(new LoginController()));
-		stage.setTitle("FTP Client");
+		stage.setTitle("SwiFTP");
 	    stage.show();
 	}
 	
-	public void showMain(){
+	public void showMain() throws UnknownHostException, IOException{
 		stage.close();
 		stage.setScene(new Scene(new MainController()));
-		stage.setTitle("FTP Client");
+		stage.setTitle("SwiFTP");
 	    stage.show();
 	}
 

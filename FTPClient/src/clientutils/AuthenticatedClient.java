@@ -9,12 +9,11 @@ public class AuthenticatedClient extends Client
 	private String username;
 	private String password;
 
-	public AuthenticatedClient(InetAddress serverAddress, int serverPort, String username, String password)
-			throws IOException {
+	public AuthenticatedClient(InetAddress serverAddress, int serverPort, String username, String password) throws IOException 
+	{
 		super(serverAddress, serverPort);
 		this.username = username;
 		this.password = password;
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
