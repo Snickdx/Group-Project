@@ -31,23 +31,19 @@ The main objectives of this Computer Networks project are to
 \item Provide functionality to allow a user to mirror folders
 \end{enumerate}
 
-All objectives shall be stated such that we, after having read the thesis, can see whether or not you have met the objective. ``To become familiar with \ldots'' is therefore not a suitable objective.
+%%=========================================
+\section{FTP Overview}
+Most FTP sessions begin with authentication of user on a given server. Authentication involves the user providing the hostname of the remote host which initiates a TCP
+connection to the FTP server in the remote host. The username and password are then sent over the TCP connection via the FTP commands USER and PASS. \par Once authenticated, the user
+is then free to carry out file operations based on the level of permissions granted by the Administrator of the given file server. The permissions determine the files and folders
+that can be accessed and whether they have read, read/write and access to delete files. FTP facilitates the transfer of files between local and remote file systems. 
 
 %%=========================================
-\section{Limitations}
-In this section you describe the limitations of your study. These may be related to the study object (physical limitations, operational limitations), to the thoroughness of the analysis, and so on.
-%%=========================================
-\section{Approach}
-Here you should describe the (scientific) approach that you will use to solve the problem and meet your objectives. You should specify the approach for each objective.
+\section{Comparison to HTTP}
+Hypertext Transfer Protocol, HTTP is a file transfer protocol that shares several characteristics with FTP. Both protocols run on TCP with the major difference between the two being that
+FTP uses two parallel TCP connections to transfer a file, a control connection and a data connection. 
 
 If there are any ethical problems related to your approach, these should be highlighted and discussed.
 %%=========================================
 \section{Structure of the Report}
 The rest of the report is structured as follows. Chapter 2 gives an introduction to \ldots
-
-\begin{remark}
-Notice that chapter and section headings shall be written in lowercase, but that all main words should start with a capital letter.
-\end{remark}
-
-
-The report should be no longer than \underline{60 pages} in this format (+ the CV).
