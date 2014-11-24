@@ -1,8 +1,12 @@
 package clientui;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import clientutils.AuthenticatedClient;
+import clientutils.InvalidFTPCodeException;
+import clientutils.PoorlyFormedFTPResponse;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -12,13 +16,14 @@ public class RunApp extends Application implements ControllerSwitcher {
 
 	Stage stage;
 	Controller current;
+	AuthenticatedClient client;
 	
 	@Override
-	public void start(Stage primaryStage) throws UnknownHostException, IOException {
-		
-      this.stage = primaryStage;
-      this.stage.getIcons().add(new Image("file: icon.png"));
-      showMain();
+	public void start(Stage primaryStage) throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException {
+		client = new AuthenticatedClient(InetAddress.getByName(globals.server), globals.port,"Nicholas","NicholasPass");
+		this.stage = primaryStage;
+		this.stage.getIcons().add(new Image("file: icon.png"));
+		showMain();
         
 	}
 	
@@ -29,9 +34,9 @@ public class RunApp extends Application implements ControllerSwitcher {
 	    stage.show();
 	}
 	
-	public void showMain() throws UnknownHostException, IOException{
+	public void showMain() throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		stage.close();
-		stage.setScene(new Scene(new MainController()));
+		stage.setScene(new Scene(new MainController(client)));
 		stage.setTitle("SwiFTP");
 	    stage.show();
 	}

@@ -37,6 +37,8 @@ import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -47,6 +49,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
@@ -55,6 +58,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import clientutils.AuthenticatedClient;
+import clientutils.InvalidFTPCodeException;
+import clientutils.PoorlyFormedFTPResponse;
+import clientutils.ServerResp;
 
 public class MainController extends Controller implements Initializable {
 	
@@ -63,14 +69,15 @@ public class MainController extends Controller implements Initializable {
 	
 	@FXML Button syncBtn, logoutBtn, uploadBtn, downloadBtn;
 	@FXML VBox content;
-	@FXML ListView homeList, serverList;
+	@FXML ListView<String> homeList, serverList;
+	@FXML Label statusLbl;
 	
-
+	public static final ObservableList<String> localFiles = FXCollections.observableArrayList();
+	public static final ObservableList<String> remoteFiles = FXCollections.observableArrayList();
 	
-	
-	public MainController() throws UnknownHostException, IOException {  
+	public MainController(AuthenticatedClient client) throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException {  
 		super("mainView.fxml");
-		//client = new AuthenticatedClient(InetAddress.getByName(globals.server), 8000, "User1", "pass1");
+		this.client = client;
 		
 		final ContextMenu contextMenu = new ContextMenu();
 		MenuItem rename = new MenuItem("Rename");
@@ -90,7 +97,15 @@ public class MainController extends Controller implements Initializable {
 		    	dialogStage.show();
 		    	rc.renameBtn.setOnAction(new EventHandler<ActionEvent>(){
 		    		public void handle(ActionEvent event){
-		    			System.out.println("Rename "+ selected + " to "+rc.renameTF.getText());
+		    			updateStatus("Rename "+ selected + " to "+rc.renameTF.getText());
+		    			System.out.println("Renaming "+selected+ " to "+ rc.renameTF.getText());
+		    			try {
+							updateStatus(client.rename(selected, rc.renameTF.getText()).getStat().toString());
+						} catch (IOException | PoorlyFormedFTPResponse
+								| InvalidFTPCodeException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 		    			Stage stage = (Stage) rc.renameBtn.getScene().getWindow();
 		    			stage.close();
 		    		}	
@@ -103,11 +118,27 @@ public class MainController extends Controller implements Initializable {
 		    @Override
 		    public void handle(ActionEvent event) {
 		    	String selected=(String) serverList.getSelectionModel().getSelectedItem();
-		    	System.out.println("delete");
+		    	System.out.println("Deleting "+ selected);
+		    	try {
+					updateStatus(client.delete(selected).getStat().toString());
+				} catch (IOException | PoorlyFormedFTPResponse
+						| InvalidFTPCodeException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    }
 		});
 		
+		//String[] items = client.pwd();
+		
+		localFiles.addAll("file.txt","file2.txt","file3.txt");
+		//remoteFiles.addAll("file4.txt","file5.c","file6.mp3");
+		
+		homeList.setItems(localFiles);
+		serverList.setItems(remoteFiles);
 		serverList.setContextMenu(contextMenu);
+		
+		//client.login();
 		
     }
 
@@ -117,17 +148,33 @@ public class MainController extends Controller implements Initializable {
 		
 	}
 	
-	public void upload(){
-		String selected=(String) homeList.getSelectionModel().getSelectedItem();
-		
+	public void updateStatus(String response){
+		statusLbl.setText(response);
 	}
 	
-	public void download(){
+	public void upload() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
+		String selected=(String) homeList.getSelectionModel().getSelectedItem();
+		System.out.println("Uploading: "+selected);
+		updateStatus(client.stor(globals.dir,selected).getStat().toString());
+	}
+	
+	public void download() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		String selected=(String) serverList.getSelectionModel().getSelectedItem();
+		System.out.println("Downloading: "+selected);
+		updateStatus(client.retr(globals.dir, selected).getStat().toString());
 	}
 
-	public void sync(){
-		
+	public void sync() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse{
+		System.out.println("Syncing Mirror");
+		client.clientMirror(globals.dir);
+		updateStatus("Mirror Synced!");
+	}
+	
+	public void quit() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
+		System.out.println("quit");
+		client.quit();
+		Stage stage = (Stage) logoutBtn.getScene().getWindow();
+		stage.close();
 	}
 	
 	public void loadView(){
