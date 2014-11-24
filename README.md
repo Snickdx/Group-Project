@@ -3,15 +3,13 @@ COMP3150
 
 Computer Networking Course Project
 
-Right just so we all know how to use this git stuff, can we all edit this readme toshow all of our Names and ID's please.
-
 Nicholas Mendez - 811002795
 Kimberly Bridglal - 811000371
 Jherez Taylor - 812003287
 Inzamam Rahaman - 810006495
 David Charles - 811000385
 
-| Functionality | Expected Response From Client | Epected Response from Server|
+| Functionality | Expected Response From Client | Expected Response from Server|
 |---------------|:----------------------------:|-----------------------------:|
 |Add file to server | STOR filename filesize(bytes) | 200 File write sucessful|
 |Retrieval File from server| RETR filename |125 Expect numberofbytes|
@@ -30,11 +28,11 @@ FTP Status codes that need to be handled by client:
 9. 202 - Command not implemented
 10. 553 - File does not exist
 
-Note: all 2xx commands may be represtned by a single enum for success
+Note: all 2xx commands may be represented by a single enum for success
 
 Note: code to represent FTP Status codes completed in client; just write code to handle the codes
 
-Code to perfrom heavy lifting of client completed.
+Code to perform heavy lifting of client completed.
 
 To use:
 
