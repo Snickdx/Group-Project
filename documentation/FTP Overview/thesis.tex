@@ -11,6 +11,8 @@
 
 %%===================================
 \begin{document}
+\setlength{\parskip}{2em}
+\setlength{\parindent}{0em}
 \include{front} % This is the titlepage
 \setcounter{page}{0}
 \pagenumbering{roman}
@@ -22,6 +24,7 @@
 \include{chapter01}
 \include{chapter02}
 \include{chapter0n}
+
 % Include more chapters as required.
 %%=========================================
 \appendix
@@ -31,9 +34,9 @@
 %%=========================================
 \bibliographystyle{apa}
 \addcontentsline{toc}{chapter}{\bibname}
-\bibliography{refs}  
+\bibliography{refs}
 %%=========================================
-\include{vitae}         % Your curriculum Vitae     
+\include{vitae}         % Your curriculum Vitae
 %%=============================================
 
 \end{document}
