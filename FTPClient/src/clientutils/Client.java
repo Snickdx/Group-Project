@@ -191,9 +191,9 @@ public abstract class Client
 				//count = inStream.read(fromServer);
 			} */
 			fOut.close();
-			System.out.println("Sendinng acknowledegement");
+			System.out.println("Sending acknowledegement");
 			this.writeString("RECEIVED");
-			System.out.println("Finised reading");
+			System.out.println("Finished reading");
 			String re = readString();
 			FTPParseProduct p = this.respParser.parseResponse(re);
 			Status st = fact.getStatus(p.getCode());

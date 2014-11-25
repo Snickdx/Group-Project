@@ -185,7 +185,7 @@ class ClientSession(client : Socket, user : User) extends ServerUnit(client){
     
   def retr(filename: String): String = 
   {
-    println("Tryting to send file")
+    println("Trying to send file")
     val filepath = user.dept + "\\" + filename
     val file = new File(filepath)
     file.exists() match

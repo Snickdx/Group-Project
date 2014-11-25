@@ -1,33 +1,202 @@
 %This is chapter 2
 %%=========================================
 \chapter{Technical Analysis}
-The FTP server has been implemented in Scala. Scala is an objected oriented, functional programming language. Like all JVM languages, Scala compiles to Java Virtual Machine bytecode. Consequently, Scala is interoperable with Java, meaning that code written in Java can be easily used and referenced by Scala code with little or no overhead. 
+The FTP server has been implemented in Scala. Scala is an objected oriented, functional programming language. Like all JVM languages,
+Scala compiles to Java Virtual Machine bytecode. Consequently, Scala is interoperable with Java, meaning that code written in Java can be easily used
+and referenced by Scala code with little or no overhead.
 
-Scala, being a functional language inspired by members of the ML family languages, has facilities to pattern match on algebraic data types by using their class based representations that implement a special purpose unapply method. There were two primary benefits of using this pattern matching:
+Scala, being a functional language inspired by members of the ML family languages, has facilities to pattern match on algebraic data types by using their
+class based representations that implement a special purpose unapply method. There were two primary benefits of using this pattern matching:
 
 \begin{enumerate}
-	
-	\item Scala's standard library facilitates the conversion of strings representing regular expressions to a objects that implement the unapply method, thereby allowing for the easy dispatch of server activity based on the commands received by the server, as well as the extraction of arguments from the commands without the aide of explicitly defined parsers
+
+	\item Scala's standard library facilitates the conversion of strings representing regular expressions to a objects that implement the unapply method,
+	thereby allowing for the easy dispatch of server activity based on the commands received by the server, as well as the extraction of arguments from the commands without
+	the aide of explicitly defined parsers
 
 	\item Scala's algebraic types allow for the usage of Option types and for the usage of types that resemble Tagged Unions to facilitate dispatch based on the results of computations
 
 \end{enumerate}
 
 
-The usage of Scala also illustrates that pieces of a Server/Client application can be built using different implementation languages so long as the contracts specified by the underlying protocol of the application is adhered to.
+The usage of Scala also illustrates that pieces of a Server/Client application can be built using different implementation languages so long as the contracts
+specified by the underlying protocol of the application is adhered to.
 
 The FTP Client was written in Java. The FTP commands that were implemented will be explored.
 
 %%=========================================
 \section{Authentication}
 
+The FTP Client sends the commands USER <insert username>, PASS <insert password> to the FTP Server
+in order to establish a session and authenticate the incoming user. The method of authentication simply
+accepts the incoming parameters and checks a Map of users where the username and the password match.
+
+\begin{lstlisting}[language=Scala, caption=Database of users, tabsize=2]
+	private val users = Map(
+	"Inzi" -> User("Inzi", "InziPass", None, "admin", "research"),
+	"Nicholas" -> User("Nicholas", "NicholasPass", None, "admin", "development"),
+	"Jane" -> User("Jane", "JanePass", None, "admin", "accounts"),
+	"John" -> User("John", "JohnPass", None, "normal", "accounts")
+	)
+
+\end{lstlisting}
+
+Here we can see that the database stores a user name, password, user type and their department.
+
+\begin{lstlisting}[language=Scala, caption=Authentication, tabsize=2]
+	def authenticate(username : String, password : String) = {
+	users.get(username)
+	}
+
+\end{lstlisting}
+
+\newpage
+On the client side, we simply parse the user input and send the data to the server.
+\begin{lstlisting}[language=Java, caption=Send authentication data to the server, showstringspaces=false, tabsize=2]
+	@Override
+	public ServerResp<String> login() throws IOException,
+	PoorlyFormedFTPResponse, InvalidFTPCodeException {
+	writeString("USER " + username);
+	String resp = readString();
+	System.out.println(resp);
+	FTPParseProduct prod = this.respParser.parseResponse(resp);
+	Status stat = this.fact.getStatus(prod.getCode());
+	System.out.println("Username sent and response received");
+	if(stat == Status.USERNAME_ACCEPTED) {
+	writeString("PASS " + password);
+	System.out.println("Set password to server");
+	String resp1 = readString();
+	System.out.println("Got response from server for password " + resp1);
+	FTPParseProduct prod1 = this.respParser.parseResponse(resp1);
+	Status stat1 = this.fact.getStatus(prod1.getCode());
+	return new ServerResp<String>(prod1.getBody(), stat1);
+	}
+	return new ServerResp<String>(prod.getBody(), stat);
+	}
+\end{lstlisting}
+\newpage
+\section{Renaming Files}
+
+RNFR (Rename From) and RNTO (Rename To) allows a user to edit the name of a given file.
+The server must receive a RNFR command before a RNTO. To deal with this error, the server
+simply returns an error code and a relevant message. The following code snippet covers this case.
+
+\begin{lstlisting}[language=Scala, showstringspaces=false]
+	def rnto(filename : String) : String = "530 Invalid command sequence,
+	RNFR must be followed by RNTO"
+
+\end{lstlisting}
+
+The case where a RNTO does not follow a RNFR is handled as well.
+
+\begin{lstlisting}[language=Scala, caption=Rename error checking, showstringspaces=false, tabsize=2]
+	def rnfr(filename : String) : String = {
+	val command = this.readString
+	command match {
+	case RNTO(newname) => rnto(filename, newname)
+	case _ => "530 RNTO must follow RNFR"
+	}
+	}
+\end{lstlisting}
+
+When the commands are entered in the correct sequence, RNFR followed by RNTO then then
+the operation can be performed.
+
+\begin{lstlisting}[language=Scala, caption=File rename operation, showstringspaces=false, tabsize=2]
+	def rnto(oldFilename : String, newFilename: String) = {
+	val oldFile = new File(user.dept + "\\" + oldFilename)
+	val newFile = new File(user.dept + "\\" + newFilename)
+	oldFile.renameTo(newFile) match {
+	case true => "250 File rename successful"
+	case false => "450 Action not taken"
+	}
+
+\end{lstlisting}
 
 
-\section{WIP3}
 
 
 %%=========================================
-\section{WIP}
+\section{Folder Mirroring}
 
+In order to demonstrate the principle of retreiving files functionality
+was implemented to allow a client to mirror the contents of a folder on the FTP server.
+Firstly, let us take a look at the server code to retrive a file.
+
+\begin{lstlisting}[language=Scala, caption=File rename operation, showstringspaces=false, tabsize=2]
+def retr(filename: String): String =
+{
+	println("Trying to send file")
+	val filepath = user.dept + "\\" + filename
+	val file = new File(filepath)
+	file.exists() match
+	{
+		case true =>
+			{
+			try
+			{
+				val fileReader = new FileInputStream(file)
+				var count = 0
+
+				val size = fileReader.getChannel().size().toInt
+				this.sendString("125 Expect " + size)
+				var arr = new Array[Byte](size)
+				outStream.flush()
+				println("Telling to expect file")
+				count = fileReader.read(arr)
+				outStream.write(arr)
+				/*
+				while(count > 0)
+				{
+					println("Read " + count + " from file ")
+					outStream.write(arr)
+					println("Sent file piece")
+					count = fileReader.read(arr)
+				}*/
+				println("Awating acknowldegement")
+				val r = this.readString
+				println("Finished transimiit")
+				outStream.flush()
+				fileReader.close()
+				"250 File send successful"
+			}
+			catch
+			{
+			case e: Exception => "450 Unsuccesful"
+			}
+	}
+	case false => "553 Doesn't exist"
+	}
+}
+
+\end{lstlisting}
+
+Given the method above, the client method to mirror the folder first retrieves the list of files in the folder and stores the names of the files
+in a data structure. An interation through the data structure is then performed with a RETR (retrive) call being executed for each file. The method can be seen on the following page.\newpage
+
+\begin{lstlisting}[language=Java, caption=Folder Mirroring, showstringspaces=false, tabsize=2]
+public void clientMirror(String dir) throws IOException,
+InvalidFTPCodeException, PoorlyFormedFTPResponse, ClassNotFoundException
+{
+	ServerResp<String[]> filesResp = this.pwd();
+	if(filesResp.getStat() == Status.SUCCESSFUL_FILE_OPERATION)
+		{
+		String[] fileNames = filesResp.getItem();
+		HashSet<String> fileSet = new HashSet<String>();
+		File folder = new File(dir);
+		File[] filesInFolder = folder.listFiles();
+		HashSet<String> names = new HashSet<String>();
+		for(File f : filesInFolder)
+		{
+			names.add(f.getName());
+		}
+		Set<String> filesToCopy = setDifference(fileSet, names);
+		for(String filename : filesToCopy)
+		{
+			ServerResp<String> resp = this.retr(dir, filename);
+		}
+	}
+}
+\end{lstlisting}
 %%=========================================
 \section{WIP2}
