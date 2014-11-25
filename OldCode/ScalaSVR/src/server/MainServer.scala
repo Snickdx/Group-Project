@@ -6,7 +6,7 @@ import java.util.concurrent.ConcurrentHashMap
 import scala.collection.mutable._
 import usermanagement.MyAuthenticator
 
-object MainServer{
+object MainServer extends App{
   
   // This methods sets up the directory structure
   // We create a directory for every department
@@ -16,11 +16,10 @@ object MainServer{
     dirs.foreach(_.mkdir())
   }
   
-  def main(args: Array[String]) = {
-    println(new File(".").getCanonicalPath())
+  println(new File(".").getCanonicalPath())
   var clientNumber = 0
   val synchBuffer = new ArrayBuffer[Thread] with SynchronizedBuffer[Thread]
-  val portNumber = 8001
+  val portNumber = 8000
   val serverSock = new ServerSocket(portNumber)
   
   try {
@@ -54,7 +53,6 @@ object MainServer{
     catch {
       case ioe : IOException => println("Error in closing socket")
     }
-  }
   }
 
 }

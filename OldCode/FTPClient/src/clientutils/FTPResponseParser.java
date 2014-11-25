@@ -30,14 +30,9 @@ public class FTPResponseParser
 			throw new PoorlyFormedFTPResponse(response);
 		}
 		
-		StringBuilder sb = new StringBuilder();
 		String code = st.nextToken();
 		if(st.hasMoreTokens())
-		{
-			while(st.hasMoreElements())
-				sb.append(st.nextToken() + " ");
-			return new FTPParseProduct(code, sb.toString());
-		}
+			return new FTPParseProduct(code, st.nextToken());
 		return new FTPParseProduct(code, "");
 	}
 

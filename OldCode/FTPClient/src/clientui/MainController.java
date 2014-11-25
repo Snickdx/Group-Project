@@ -164,7 +164,7 @@ public class MainController extends Controller implements Initializable {
 		updateStatus(client.retr(globals.dir, selected).getStat().toString());
 	}
 
-	public void sync() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse, ClassNotFoundException{
+	public void sync() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse{
 		System.out.println("Syncing Mirror");
 		client.clientMirror(globals.dir);
 		updateStatus("Mirror Synced!");

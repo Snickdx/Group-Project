@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root prefHeight="158.0" prefWidth="398.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+      <AnchorPane prefHeight="163.0" prefWidth="405.0">
+         <children>
+                
+                      <Label layoutX="23.0" layoutY="44.0" prefHeight="36.0" prefWidth="137.0" text="New Name:">
+                   <font>
+                      <Font size="25.0" />
+                   </font>
+                </Label>
+                <TextField fx:id="renameTF" layoutX="159.0" layoutY="49.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="213.0" />
+                <Button id="loginBtn" fx:id="renameBtn" layoutX="159.0" layoutY="87.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#rename" prefHeight="25.0" prefWidth="213.0" text="Rename">
+                   <font>
+                      <Font size="13.0" />
+                   </font>
+                </Button>
+         </children>
+      </AnchorPane>
+              
+	</children>
+</fx:root>

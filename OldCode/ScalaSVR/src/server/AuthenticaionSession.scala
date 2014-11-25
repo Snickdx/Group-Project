@@ -7,13 +7,14 @@ import java.net.{InetAddress, Socket}
 import java.util.concurrent.{Callable}
 import scala.util.matching.Regex
 
-class AuthenticaionSession(client : Socket) extends ServerUnit(client)
-{
+class AuthenticaionSession(client : Socket) {// extends Callable[Option[ClientSession]]{
   
   private val invalidPasswordString = "430 Invalid username or password"
   private val acceptedUsername = "331 Username accepted, need password\r\n"
   private val goodbyeString = "231 quiting service"
-  private val userLoggedIn = "230 User logged in"
+  private val inputStream = client.getInputStream()
+  private val clientCommands = new BufferedReader(new InputStreamReader(inputStream))
+  private val toClient = new DataOutputStream(client.getOutputStream())
   private var username : Option[String] = None
   private var password : Option[String] = None
   private var completed = false;
@@ -23,22 +24,18 @@ class AuthenticaionSession(client : Socket) extends ServerUnit(client)
     var processed: Either[String, User] = Left("Awaiting client")
     var user : Option[User] = None
     while(!completed) {
-      val command = this.readString
-      println("received " + command + " from client")
+      val command = clientCommands.readLine().trim()
       processed = processClientRequest(command)
       processed match {
-        case Left(msg) => {
-          println("Client not yet authenticated, sending " + msg)
-          this.sendString(msg)
-        }
+        case Left(msg) => toClient.writeBytes(msg + "\r\n")
         case Right(u) => {
-          println("Client authenticated.....")
-          this.sendString(userLoggedIn)
-          println("Wrote admission " + userLoggedIn)
           user = Some(u)
-          completed = true
+          toClient.writeBytes("230 User logged in, proceed. Logged out if appropriate.\r\n")
         }
       }
+      
+      // We don't want to use all of the available resources
+      Thread.sleep(1000)
     }
     user.map(user => new ClientSession(client, user))
   }
@@ -75,7 +72,7 @@ class AuthenticaionSession(client : Socket) extends ServerUnit(client)
           completed = true
           Left(goodbyeString)
       }
-      case x => Left("530 Not logged in " + x +"\r\n")
+      case _ => Left("530 Not logged in\r\n")
     }
     
     
@@ -84,7 +81,3 @@ class AuthenticaionSession(client : Socket) extends ServerUnit(client)
   }
 
 }
-
-//private val inputStream = client.getInputStream()
-  //private val clientCommands = new BufferedReader(new InputStreamReader(inputStream))
-  //private val toClient = new DataOutputStream(client.getOutputStream())

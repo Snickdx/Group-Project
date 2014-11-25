@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root prefHeight="358.0" prefWidth="527.0" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+      <AnchorPane prefHeight="358.0" prefWidth="527.0">
+         <children>
+                
+                      <Label layoutX="96.0" layoutY="117.0" prefHeight="36.0" prefWidth="167.0" text="Username:">
+                   <font>
+                      <Font size="25.0" />
+                   </font>
+                </Label>
+                <Label layoutX="105.0" layoutY="161.0" prefHeight="26.0" prefWidth="137.0" text="Password:">
+                   <font>
+                      <Font size="25.0" />
+                   </font>
+                </Label>
+                <TextField fx:id="usernameTF" layoutX="217.0" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="213.0" />
+                <TextField fx:id="passwordTF" layoutX="217.0" layoutY="166.0" prefHeight="25.0" prefWidth="214.0" />
+                <Button id="loginBtn" fx:id="loginBtn" layoutX="218.0" layoutY="204.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="213.0" text="Log-In">
+                   <font>
+                      <Font size="13.0" />
+                   </font>
+                </Button>
+         </children>
+      </AnchorPane>
+              
+	</children>
+</fx:root>
