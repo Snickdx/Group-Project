@@ -23,6 +23,30 @@ In addition to the functionality provided, there are several possible improvemen
 \subsection{Short term improvements}
 The module for authentication currently used by the server uses a Map hardcoded into the application. As such, it may be desirable to decouple the facilities for authentication from the data. This can be achieved using a database. Integration of a database would involve the writing of an object  that uses the Authenticator trait, and then simply replacing the object being referenced in the AuthenticaionSession class to authenticate users
 
+\begin{lstlisting}[language=Scala, caption=Database of users, tabsize=2]
+	package usermanagement
+		// Algebraic datatype used to represent the user retrieved from the database
+	case class User(username : String, password : String, salt : Option[String],
+	role : String, dept : String) {
+	override def toString =
+	"Username: " + username + "\nPassword: " + password
+	}
+	// The trait to be mixed into the class responsible for retrieving user informaion
+	trait Authenticator {
+	/*
+	* This method accepts the username and password of the user being added
+	* and returns an Option monad on a User instance
+	* @param username : the username for the client
+	* @param password : the password for the client
+	* @return: an option monad on a User object, None - couldn't authenticate,
+	* Some(u), authentication successful
+	*/
+	def authenticate(username : String, password : String) : Option[User]
+	
+	}
+\end{lstlisting}
+
+
 \subsection{Long term improvements}
 The application provides only a subset of the commands that constitute the FTP protocol, giving the application facilities to rename files on the server, retrieval files from the server, delete files on the server, and to send files on the server. As such, to make the system more robust and flexible, more commands specified by the FTP may be implemented 
 
