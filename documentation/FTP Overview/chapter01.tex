@@ -36,14 +36,26 @@ The main objectives of this Computer Networks project are to
 Most FTP sessions begin with authentication of user on a given server. Authentication involves the user providing the hostname of the remote host which initiates a TCP
 connection to the FTP server in the remote host. The username and password are then sent over the TCP connection via the FTP commands USER and PASS. \par Once authenticated, the user
 is then free to carry out file operations based on the level of permissions granted by the Administrator of the given file server. The permissions determine the files and folders
-that can be accessed and whether they have read, read/write and access to delete files. FTP facilitates the transfer of files between local and remote file systems. 
+that can be accessed and whether they have read, read/write and access to delete files. FTP facilitates the transfer of files between local and remote file systems.
 
 %%=========================================
-\section{Comparison to HTTP}
-Hypertext Transfer Protocol, HTTP is a file transfer protocol that shares several characteristics with FTP. Both protocols run on TCP with the major difference between the two being that
-FTP uses two parallel TCP connections to transfer a file, a control connection and a data connection. 
+\section{FTP Detailed}
+FTP runs on TCP and uses two parallel TCP connections to transfer a file, a control connection and a data connection. Sending control information between the two hosts is handled by the control connection.
+This control information includes user identification, user password, commands to change the remote directory and also commands to put and get files. All FTP commands are sent via the control
+connection. The data connection handles the actual transfer of the file between hosts. Due to the use of a separate control connection, FTP is said to sends its control information out of band.\par
+When an FTP session is started, the client initiates a control TCP connection with the server on port 21. The data channel is opened on any unused port set by the application programmer or administrator.
+Upon receipt of control commands from the client, the server initiates a TCP data connection to the client side. Only one file is sent per data connection, that is, the file is sent and then the data connection is closed.
+The control connection remains open for the duration of the FTP sessions and subsequent files are sent over new data connections that are opened.
 
-If there are any ethical problems related to your approach, these should be highlighted and discussed.
+There are two ways to send files over the data channel. The first is the Active Mode where the client specifies to the server how the transfer will be done. The client chooses a local port
+and mandates that the server send data to that port. A connection on port 20 is initiated by the server and the data is sent. Issues can arise from this setup as it becomes a requirement
+for firewalls to allow incoming connections on port 20 to a vast range of ports on on client machines. A vulnerability can be exploited by initiating connections from port 20 in order to
+scan internal machines.
+
+The second method of data transfer is Passive Mode. The client requests a file from the server and specifies how the transfer will be done. The server selects an unreserved port
+and then increments from that port for each file transferred during that FTP session. The server then notifies the client to connect to the specified port to receive the file. The
+upside of this is that since the client initiates the connection then additional ports don't need to be opened in the firewall.
+
 %%=========================================
 \section{Structure of the Report}
 The rest of the report is structured as follows. Chapter 2 gives an introduction to \ldots
