@@ -50,9 +50,9 @@ for firewalls to allow incoming connections on port 20 to a vast range of ports 
 scan internal machines. \par
 
 The second method of data transfer is Passive Mode. The client requests a file from the server and specifies how the transfer will be done. The server selects an unreserved port
-and then increments from that port for each file transferred during that FTP session. The server then notifies the client to connect to the specified port to receive the file. The
-upside of this is that since the client initiates the connection then additional ports don't need to be opened in the firewall.
+which is incremented for each file transferred during that FTP session. The server then notifies the client to connect to the specified port to receive the file. The
+upside of this is that since the client initiates the connection then additional ports don't need to be opened in the firewall. \newpage
 
-%%=========================================
-\section{Structure of the Report}
-The rest of the report is structured as follows. Chapter 2 gives an introduction to \ldots
+The FTP server is required to maintain the state about the user. It is necessary to associate the control connection with a specific user account, the current directory being accessed by
+the user must also be monitored. There is a significant overhead associated with tracking this state information for each client and thus the amount of connections that can be maintained
+simultaneously is limited.
