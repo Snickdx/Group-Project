@@ -1,9 +1,12 @@
 %This is chapter 2
 %%=========================================
 \chapter{Technical Analysis}
-The FTP server has been implemented in Scala. Scala is an objected oriented, functional programming language. It has interoperability with Java as it runs on the Java Virtual Machine.
-This means that Java and Scala classes can be mixed in the same project and can refer to each other. Scala was chosen as it allows for easy pattern matching in order to determine
-which FTP command is being received. The use of Scala also demonstrates that the implementation of an FTP Server and Client is irrelevant as long as the protocol is followed.
+The FTP server has been implemented in Scala. Scala is an objected oriented, functional programming language. Like all JVM languages, Scala compiles to Java Virtual Machine bytecode. Consequently, Scala is interoperable with Java, meaning that code written in Java can be easily used and referenced by Scala code with little or no overhead. 
+
+Scala, being a functional language inspired by members of the ML family languages, has facilities to pattern match on algebraic data types by using their class based representations that implement a special purpose unapply method. Moreover, the Scala standard library facilitates the construction of such representations of regular expressions easily by simply calling a method on a String. Hence, Scala was choosen as the implementation language of the server as it allowed for the easy dispatch of functionality depending on the commands recieved by the server, and the easy extraction of any arguments contained in those commands.
+
+The usage of Scala also illustrates that pieces of a Server/Client application can be built using different implementation languages so long as the contracts specified by the underlying protocol of the application is adhered to.
+
 The FTP Client was written in Java. The FTP commands that were implemented will be explored.
 
 %%=========================================
