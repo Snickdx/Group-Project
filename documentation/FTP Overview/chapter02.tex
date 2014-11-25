@@ -29,7 +29,10 @@ The FTP Client was written in Java. The FTP commands that were implemented will 
 
 The FTP Client sends the commands USER <insert username>, PASS <insert password> to the FTP Server
 in order to establish a session and authenticate the incoming user. The method of authentication simply
-accepts the incoming parameters and checks a Map of users where the username and the password match.
+accepts the incoming parameters and checks a Map of users where the username and the password match.\par
+
+The implementation that has been delivered uses Passive Mode. The FTP Server chooses a random port for the
+client to receive the file on. Please see chapter one for a detailed explanation.
 
 \begin{lstlisting}[language=Scala, caption=Database of users, tabsize=2]
 	private val users = Map(
