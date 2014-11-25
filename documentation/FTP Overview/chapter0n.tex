@@ -12,14 +12,17 @@ This section is similar to the Summary and Conclusions in the beginning of your 
 
 %%=========================================
 \section{Discussion}
-Here, you may discuss your findings, their strengths and limitations.
+
+The application, however, is not without limitations. The application has difficulty transferring large file sizes.
+
 %%=========================================
 \section{Recommendations for Further Work}
-You should give recommendations to possible extensions to your work. The recommendations should be as specific as possible, preferably with an objective and an indication of a possible approach.
 
-The recommendations may be classified as:
-\begin{itemize}
-\item Short-term
-\item Medium-term
-\item Long-term
-\end{itemize}
+In addition to the functionality provided, there are several possible improvements that can be made to the application.
+
+\subsection{Short term improvements}
+The module for authentication currently used by the server uses a Map hardcoded into the application. As such, it may be desirable to decouple the facilities for authentication from the data. This can be achieved using a database. Integration of a database would involve the writing of an object  that uses the Authenticator trait, and then simply replacing the object being referenced in the AuthenticaionSession class to authenticate users
+
+\subsection{Long term improvements}
+The application provides only a subset of the commands that constitute the FTP protocol, giving the application facilities to rename files on the server, retrieval files from the server, delete files on the server, and to send files on the server. As such, to make the system more robust and flexible, more commands specified by the FTP may be implemented 
+
