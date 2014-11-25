@@ -1,7 +1,8 @@
 package clientui;
 
-public class globals {
-	static int  port = 8000;
-	static String server = "192.168.0.115";
-	static String dir = "C:\\Users\\Nicholas\\Desktop\\local";
+public class Globals {
+	static int  port = 8001;
+	static String server = "localhost";
+	static String localDir = "C:\\Users\\Nicholas\\Desktop\\local";
+	static String mirrorDir ="C:\\Users\\Nicholas\\Desktop\\mirror";
 }

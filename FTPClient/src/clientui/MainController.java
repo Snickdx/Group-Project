@@ -32,6 +32,7 @@
 
 package clientui;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -62,7 +63,7 @@ import clientutils.InvalidFTPCodeException;
 import clientutils.PoorlyFormedFTPResponse;
 import clientutils.ServerResp;
 
-public class MainController extends Controller implements Initializable {
+public class MainController extends Controller {
 	
 	FXMLLoader loader;
 	AuthenticatedClient client;
@@ -72,12 +73,13 @@ public class MainController extends Controller implements Initializable {
 	@FXML ListView<String> homeList, serverList;
 	@FXML Label statusLbl;
 	
-	public static final ObservableList<String> localFiles = FXCollections.observableArrayList();
-	public static final ObservableList<String> remoteFiles = FXCollections.observableArrayList();
+	public ObservableList<String> localFiles = FXCollections.observableArrayList();
+	public ObservableList<String> remoteFiles = FXCollections.observableArrayList();
 	
 	public MainController(AuthenticatedClient client) throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException {  
 		super("mainView.fxml");
 		this.client = client;
+		client.login();
 		
 		final ContextMenu contextMenu = new ContextMenu();
 		MenuItem rename = new MenuItem("Rename");
@@ -121,32 +123,20 @@ public class MainController extends Controller implements Initializable {
 		    	System.out.println("Deleting "+ selected);
 		    	try {
 					updateStatus(client.delete(selected).getStat().toString());
-				} catch (IOException | PoorlyFormedFTPResponse
-						| InvalidFTPCodeException e) {
-					// TODO Auto-generated catch block
+				} catch (IOException | PoorlyFormedFTPResponse | InvalidFTPCodeException e) {
 					e.printStackTrace();
 				}
 		    }
 		});
 		
-		//String[] items = client.pwd();
 		
-		localFiles.addAll("file.txt","file2.txt","file3.txt");
-		//remoteFiles.addAll("file4.txt","file5.c","file6.mp3");
-		
-		homeList.setItems(localFiles);
-		serverList.setItems(remoteFiles);
+
+		refreshLocalView();
+		refreshRemoteView();
 		serverList.setContextMenu(contextMenu);
 		
-		//client.login();
-		
     }
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 	public void updateStatus(String response){
 		statusLbl.setText(response);
@@ -155,18 +145,20 @@ public class MainController extends Controller implements Initializable {
 	public void upload() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		String selected=(String) homeList.getSelectionModel().getSelectedItem();
 		System.out.println("Uploading: "+selected);
-		updateStatus(client.stor(globals.dir,selected).getStat().toString());
+		refreshRemoteView();
+		updateStatus(client.stor(Globals.localDir,selected).getStat().toString());
 	}
 	
 	public void download() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		String selected=(String) serverList.getSelectionModel().getSelectedItem();
 		System.out.println("Downloading: "+selected);
-		updateStatus(client.retr(globals.dir, selected).getStat().toString());
+		refreshLocalView();
+		updateStatus(client.retr(Globals.localDir, selected).getStat().toString());
 	}
 
 	public void sync() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse, ClassNotFoundException{
 		System.out.println("Syncing Mirror");
-		client.clientMirror(globals.dir);
+		client.clientMirror(Globals.mirrorDir);
 		updateStatus("Mirror Synced!");
 	}
 	
@@ -177,7 +169,32 @@ public class MainController extends Controller implements Initializable {
 		stage.close();
 	}
 	
-	public void loadView(){
-		
+    public String[] getLocalDir(String path){
+    	File folder = new File(path);
+    	File[] listOfFiles = folder.listFiles();
+    	String[] files = new String[listOfFiles.length];
+    	for (int i = 0; i < listOfFiles.length; i++) {
+			files[i]=listOfFiles[i].getName();
+		}
+    	return files;
+    }
+	
+    
+	public void refreshLocalView(){
+		homeList.setItems(null);
+		localFiles = FXCollections.observableArrayList();
+		String[] files = getLocalDir(Globals.localDir);
+		for (int i = 0; i < files.length; i++) {
+			localFiles.add(files[i]);
+		}
+		homeList.setItems(localFiles);
+	}
+	
+	public void refreshRemoteView() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse{
+		serverList.setItems(null);
+		remoteFiles = FXCollections.observableArrayList();
+		ServerResp<String[]> res1 = client.pwd();
+		for(String str : res1.getItem())remoteFiles.add(str);
+		serverList.setItems(remoteFiles);
 	}
 }

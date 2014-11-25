@@ -3,7 +3,6 @@ package clientui;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-
 import clientutils.AuthenticatedClient;
 import clientutils.InvalidFTPCodeException;
 import clientutils.PoorlyFormedFTPResponse;
@@ -20,7 +19,8 @@ public class RunApp extends Application implements ControllerSwitcher {
 	
 	@Override
 	public void start(Stage primaryStage) throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException {
-		client = new AuthenticatedClient(InetAddress.getByName(globals.server), globals.port,"Nicholas","NicholasPass");
+		this.client = new AuthenticatedClient(InetAddress.getByName(Globals.server), Globals.port,"Nicholas","NicholasPass");
+		//this.client = new AuthenticatedClient(InetAddress.getByName("localhost"), 8001,"Nicholas","NicholasPass");
 		this.stage = primaryStage;
 		this.stage.getIcons().add(new Image("file: icon.png"));
 		showMain();
@@ -44,7 +44,7 @@ public class RunApp extends Application implements ControllerSwitcher {
 	public static void main(String[] args) {
 		launch(args);
 	}
-
+	
 	@Override
 	public void setViewParent(Controller screenPage) {
 		// TODO Auto-generated method stub
