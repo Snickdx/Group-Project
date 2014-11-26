@@ -130,7 +130,6 @@ public class MainController extends Controller {
 		});
 		
 		
-
 		refreshLocalView();
 		refreshRemoteView();
 		serverList.setContextMenu(contextMenu);
@@ -145,15 +144,15 @@ public class MainController extends Controller {
 	public void upload() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		String selected=(String) homeList.getSelectionModel().getSelectedItem();
 		System.out.println("Uploading: "+selected);
-		refreshRemoteView();
 		updateStatus(client.stor(Globals.localDir,selected).getStat().toString());
+		refreshRemoteView();
 	}
 	
 	public void download() throws IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		String selected=(String) serverList.getSelectionModel().getSelectedItem();
 		System.out.println("Downloading: "+selected);
-		refreshLocalView();
 		updateStatus(client.retr(Globals.localDir, selected).getStat().toString());
+		
 	}
 
 	public void sync() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse, ClassNotFoundException{
@@ -181,8 +180,6 @@ public class MainController extends Controller {
 	
     
 	public void refreshLocalView(){
-		homeList.setItems(null);
-		localFiles = FXCollections.observableArrayList();
 		String[] files = getLocalDir(Globals.localDir);
 		for (int i = 0; i < files.length; i++) {
 			localFiles.add(files[i]);
@@ -191,10 +188,22 @@ public class MainController extends Controller {
 	}
 	
 	public void refreshRemoteView() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse{
-		serverList.setItems(null);
-		remoteFiles = FXCollections.observableArrayList();
 		ServerResp<String[]> res1 = client.pwd();
 		for(String str : res1.getItem())remoteFiles.add(str);
 		serverList.setItems(remoteFiles);
 	}
+	
+//	public void refreshLocalView(){
+//		String[] files = getLocalDir(Globals.localDir);
+//		localFiles.add(files[files.length]);
+//		homeList.setItems(localFiles);
+//	}
+//	
+//	public void refreshRemoteView() throws IOException, InvalidFTPCodeException, PoorlyFormedFTPResponse{
+//		ServerResp<String[]> res1 = client.pwd();
+//		String newItem = new String();
+//		for(String str : res1.getItem())newItem=str;
+//		remoteFiles.add(newItem);
+//		serverList.setItems(remoteFiles);
+//	}
 }

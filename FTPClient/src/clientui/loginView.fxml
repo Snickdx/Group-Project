@@ -23,12 +23,13 @@
                    </font>
                 </Label>
                 <TextField fx:id="usernameTF" layoutX="217.0" layoutY="122.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="213.0" />
-                <TextField fx:id="passwordTF" layoutX="217.0" layoutY="166.0" prefHeight="25.0" prefWidth="214.0" />
+            <PasswordField fx:id="passwordTF" layoutX="218.0" layoutY="167.0" prefHeight="25.0" prefWidth="213.0" />
                 <Button id="loginBtn" fx:id="loginBtn" layoutX="218.0" layoutY="204.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="213.0" text="Log-In">
                    <font>
                       <Font size="13.0" />
                    </font>
                 </Button>
+            <Label fx:id="statusLbl" layoutX="98.0" layoutY="85.0" prefHeight="25.0" prefWidth="331.0" text="Please Enter Credentials" />
          </children>
       </AnchorPane>
               

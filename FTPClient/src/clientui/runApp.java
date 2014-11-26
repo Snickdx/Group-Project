@@ -19,17 +19,15 @@ public class RunApp extends Application implements ControllerSwitcher {
 	
 	@Override
 	public void start(Stage primaryStage) throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException {
-		this.client = new AuthenticatedClient(InetAddress.getByName(Globals.server), Globals.port,"Nicholas","NicholasPass");
-		//this.client = new AuthenticatedClient(InetAddress.getByName("localhost"), 8001,"Nicholas","NicholasPass");
 		this.stage = primaryStage;
 		this.stage.getIcons().add(new Image("file: icon.png"));
-		showMain();
-        
+		showLogin();
 	}
 	
-	public void showLogin(){
+	public void showLogin() throws UnknownHostException, IOException, PoorlyFormedFTPResponse, InvalidFTPCodeException{
 		stage.close();
-		stage.setScene(new Scene(new LoginController()));
+		LoginController login =new LoginController(this);
+		stage.setScene(new Scene(login));
 		stage.setTitle("SwiFTP");
 	    stage.show();
 	}
