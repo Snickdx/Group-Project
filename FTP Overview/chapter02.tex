@@ -47,9 +47,7 @@ client to receive the file on. Please see chapter one for a detailed explanation
 Here we can see that the database stores a user name, password, user type and their department.
 
 \begin{lstlisting}[language=Scala, caption=Authentication, tabsize=2]
-	def authenticate(username : String, password : String) = {
-	users.get(username)
-	}
+	def authenticate(username : String, password : String) = { users.get(username) }
 
 \end{lstlisting}
 
@@ -202,4 +200,3 @@ InvalidFTPCodeException, PoorlyFormedFTPResponse, ClassNotFoundException
 }
 \end{lstlisting}
 %%=========================================
-\section{WIP2}

@@ -1,19 +1,24 @@
-%This is the last chapter 
+%This is the last chapter
 %%=========================================
 \chapter[Summary]{Summary and Recommendations for Further Work}
 
-In this final chapter you should sum up what you have done and which results you have got. You should also discuss your findings, and give recommendations for further work.
-
 %%=========================================
 \section{Summary and Conclusions}
-Here, you present a brief summary of your work and list the main results you have got. You should give comments to each of the objectives in Chapter 1 and state whether or not you have met the objective. If you have not met the objective, you should explain why (e.g., data not available, too difficult).
 
-This section is similar to the Summary and Conclusions in the beginning of your report, but more detailed---referring to the the various sections in the report.
+An overview of the core functionality of the FTP Server and Client was provided. Detailed code can be found in the attached source code submission.
+In order to test the FTP Server and Client going it is necessary to the dependencies.
+Scala - http://www.scala-lang.org/download/
+The Scala plugin for Eclipse - http://download.scala-ide.org/sdk/helium/e38/scala211/stable/site
+Alternatively, the Scala plugin for IntelliJ - https://plugins.jetbrains.com/plugin/?id=1347\par
+
+The next step would be to configure the global variables in the client. These are found at FTPCLient/src/clietui/globals.java
+Change these to suit your environment. Compile both applications. For the server, execute MainServer.scala and for the client execute runApp.java
 
 %%=========================================
 \section{Discussion}
 
-The application, however, is not without limitations. The application has difficulty transferring large file sizes.
+The application, however, is not without limitations. The application has difficulty transferring large file sizes. There are also some optimizations that
+can be made to the UI in order to ensure that the correct file listing is displayed without having to restart the application.
 
 %%=========================================
 \section{Recommendations for Further Work}
@@ -31,7 +36,7 @@ The module for authentication currently used by the server uses a Map hardcoded 
 	override def toString =
 	"Username: " + username + "\nPassword: " + password
 	}
-	// The trait to be mixed into the class responsible for retrieving user informaion
+	// The trait to be mixed into the class responsible for retrieving user information
 	trait Authenticator {
 	/*
 	* This method accepts the username and password of the user being added
@@ -42,11 +47,10 @@ The module for authentication currently used by the server uses a Map hardcoded 
 	* Some(u), authentication successful
 	*/
 	def authenticate(username : String, password : String) : Option[User]
-	
+
 	}
 \end{lstlisting}
 
 
 \subsection{Long term improvements}
-The application provides only a subset of the commands that constitute the FTP protocol, giving the application facilities to rename files on the server, retrieval files from the server, delete files on the server, and to send files on the server. As such, to make the system more robust and flexible, more commands specified by the FTP may be implemented 
-
+The application provides only a subset of the commands that constitute the FTP protocol, giving the application facilities to rename files on the server, retrieval files from the server, delete files on the server, and to send files on the server. As such, to make the system more robust and flexible, more commands specified by the FTP may be implemented
